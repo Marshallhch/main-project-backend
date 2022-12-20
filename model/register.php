@@ -84,7 +84,7 @@
       if(!$pwd_valid){
         echo json_encode(array("login_msg" => "비밀번호가 틀립니다."));
       } else {
-        session_start();
+        
         $_SESSION['userid'] = $userid;
         echo json_encode(array("userid" => $_SESSION['userid']));
       }
@@ -100,6 +100,7 @@
     if(isset($_SESSION['userid'])){
       session_unset();
       session_destroy();
+      echo json_encode(array("userid" => "guest"));
     }
   }
 ?>
