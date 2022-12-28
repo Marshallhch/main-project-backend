@@ -5,10 +5,17 @@
   // 2. sql 쿼리 실행
   // 3. 쿼리 결과 json 배열로 응답
 
+  $limit_param = $_GET['limit'];
+  if($limit_param == "all"){
+    $filter_limit = '';
+  } else {
+    $filter_limit = "LIMIT $limit_param";
+  } 
+
   // 접속 정보 로드
   include_once $_SERVER['DOCUMENT_ROOT'].'/main_backend/connect/dbconn.php';
 
-  $sql = "SELECT * FROM spl_products ORDER BY pro_reg DESC LIMIT 6";
+  $sql = "SELECT * FROM spl_products ORDER BY pro_reg DESC $filter_limit";
   $result = mysqli_query($conn, $sql); // 첫번째 파라미터 : 접속정보, 두번째 파라미터 : 쿼리문
 
   $json_result = array(); // 빈 배열 초기화
