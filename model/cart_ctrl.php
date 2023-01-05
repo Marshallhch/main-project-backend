@@ -46,7 +46,15 @@
   }
 
   // 2. 카트 요청
-  if($req_cart == "get_cart"){}
+  if($req_cart == "get_cart"){
+    if(isset($_SESSION['cart'])){
+      $cart_lists = $_SESSION['cart'];
+    } else {
+      $cart_lists = '카트에 추가된 상품이 없습니다.';
+    }
+
+    echo json_encode($cart_lists);
+  }
 
   // 3. 카트 삭제
   if($req_cart == "del_cart"){}
