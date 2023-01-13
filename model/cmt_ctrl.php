@@ -66,6 +66,14 @@
     $content = $_POST['cmt_cont'];
     $cmt_reg = date("Y-m-d H:i:s");
 
+    if(isset($_POST['cmt_star'])){
+      $cmt_star = $_POST['cmt_star'];
+    } else {
+      $cmt_star = 0;
+    }
+
+    // echo json_encode(array("u_idx" => $u_idx, "pro_idx" => $pro_idx, "content" => $content, "cmt_reg" => $cmt_reg, "cmt_star" => $cmt_star));
+
     if(!isset($_SESSION['useridx'])){
       echo json_encode(array("msg" => "상품평을 작성하려면 로그인이 필요합니다."));
       exit();
@@ -74,7 +82,7 @@
     // echo json_encode(array("u_idx" => $u_idx, "pro_idx" => $pro_idx, "content" => $content, "cmt_reg" => $cmt_reg));
 
     // sql 입력 명령어 작성
-    $sql = "INSERT INTO spl_cmt (cmt_u_idx, cmt_pro_idx, cmt_cont, cmt_reg) VALUES (?,?,?,?)";
+    $sql = "INSERT INTO spl_cmt (cmt_u_idx, cmt_pro_idx, cmt_cont, cmt_reg, cmt_star) VALUES (?,?,?,?,?)";
 
     // stmt_init 참조 : https://www.w3schools.com/php/func_mysqli_stmt_init.asp
     $stmt = $conn->stmt_init();
@@ -84,7 +92,7 @@
       echo json_encode(array("msg" => "상품평 입력이 되지 않았습니다."));
     }
 
-    $stmt -> bind_param("ssss", $u_idx, $pro_idx, $content, $cmt_reg);
+    $stmt -> bind_param("sssss", $u_idx, $pro_idx, $content, $cmt_reg, $cmt_star);
     $stmt -> execute();
     
     if($stmt->affected_rows > 0){
@@ -120,7 +128,7 @@
 
       $json_result = array(); // 빈 배열 초기화
       while($row = mysqli_fetch_array($result)){
-        array_push($json_result, array("cmt_idx" => $row['cmt_idx'], "cmt_cont" => $row['cmt_cont'], "cmt_reg" => $row['cmt_reg'], "user_id" => $row['user_id'], "session_id" => $userid)); // 첫번째 파라미터 : 대상 배열, 두번째 파라미터는 배열 입력값
+        array_push($json_result, array("cmt_idx" => $row['cmt_idx'], "cmt_cont" => $row['cmt_cont'], "cmt_reg" => $row['cmt_reg'], "user_id" => $row['user_id'], "session_id" => $userid, "rating" => $row['cmt_star'])); // 첫번째 파라미터 : 대상 배열, 두번째 파라미터는 배열 입력값
       }
     }
     echo json_encode($json_result);
