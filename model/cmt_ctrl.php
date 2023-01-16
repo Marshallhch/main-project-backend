@@ -69,7 +69,7 @@
     if(isset($_POST['cmt_star'])){
       $cmt_star = $_POST['cmt_star'];
     } else {
-      $cmt_star = 0;
+      $cmt_star = 1;
     }
 
     // echo json_encode(array("u_idx" => $u_idx, "pro_idx" => $pro_idx, "content" => $content, "cmt_reg" => $cmt_reg, "cmt_star" => $cmt_star));
