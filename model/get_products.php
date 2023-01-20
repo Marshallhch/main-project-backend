@@ -5,7 +5,6 @@
   // 2. sql 쿼리 실행
   // 3. 쿼리 결과 json 배열로 응답
 
-
   $limit = $_GET['qnt'];
   if($limit == 'all'){
     $query_qnt = '';

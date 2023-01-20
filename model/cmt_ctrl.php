@@ -3,9 +3,6 @@
   include $_SERVER['DOCUMENT_ROOT'].'/main_backend/etc/error.php';
   include_once $_SERVER['DOCUMENT_ROOT'].'/main_backend/connect/dbconn.php';
 
-  // if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['req_sign']) && $_GET['req_sign'] == 'post_cmt'){
-  //   post_cmt($conn);
-  // }
 
   function parse_raw_http_request(array &$a_data){
     // read incoming data
@@ -72,14 +69,10 @@
       $cmt_star = 1;
     }
 
-    // echo json_encode(array("u_idx" => $u_idx, "pro_idx" => $pro_idx, "content" => $content, "cmt_reg" => $cmt_reg, "cmt_star" => $cmt_star));
-
     if(!isset($_SESSION['useridx'])){
       echo json_encode(array("msg" => "상품평을 작성하려면 로그인이 필요합니다."));
       exit();
     }
-
-    // echo json_encode(array("u_idx" => $u_idx, "pro_idx" => $pro_idx, "content" => $content, "cmt_reg" => $cmt_reg));
 
     // sql 입력 명령어 작성
     $sql = "INSERT INTO spl_cmt (cmt_u_idx, cmt_pro_idx, cmt_cont, cmt_reg, cmt_star) VALUES (?,?,?,?,?)";
@@ -157,8 +150,6 @@
       exit();
     }
 
-    // echo json_encode(array("cmt_idx" => $cmt_idx, "cmt_cont" => $cmt_cont, "cmt_star" => $cmt_star));
-
     $sql = "UPDATE spl_cmt SET cmt_cont = ?, cmt_star = ? WHERE cmt_idx = ?";
     $stmt = $conn->stmt_init();
 
@@ -170,14 +161,7 @@
     $stmt -> bind_param("sss", $cmt_cont, $cmt_star, $cmt_idx);
     $stmt -> execute();
     
-    // if($stmt->affected_rows > 0){
-    //   http_response_code(200);
-      echo json_encode(array("msg" => "상품평이 수정되었습니다."));
-    // } else {
-    //   http_response_code(400);
-    //   echo json_encode(array("msg" => "글 수정에 실패했습니다.(2)"));
-    // }
-
-    // echo json_encode(array("cmt_idx" => $cmt_idx, "cmt_cont" => $cmt_cont));
+    echo json_encode(array("msg" => "상품평이 수정되었습니다."));
+ 
   }
 ?>

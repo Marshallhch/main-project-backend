@@ -48,10 +48,6 @@
       http_response_code(400);
       echo json_encode(array("msg" => "Sign Up Fail!!"));
     }
-
-    // echo json_encode(array("name" => var_dump($stmt)));
-
-    // echo json_encode(array("name" => $name, "id" => $id, "email" => $email, "pwd" => $pwd)); // 문자열을 json 배열 변수로 반환한다. 파라미터에는 반드시 배열이 있어야 한다.
   }
 
   function signin($conn){
@@ -90,12 +86,7 @@
         $_SESSION['userlvl'] = $login_data['user_lvl'];
         echo json_encode(array("userid" => $_SESSION['userid'], "useridx" => $login_data['user_idx'], "userlvl" => $_SESSION['userlvl']));
       }
-
-      // echo json_encode(array("userid" => $pwd_valid));
     }
-
-    // echo $userid, $pwd;
-    // echo json_encode(array("userid" => mysqli_num_rows($result)));
   } // 로그인 처리 함수
 
   function signout(){
