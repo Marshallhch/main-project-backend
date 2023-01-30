@@ -1,5 +1,5 @@
 <?php
-  include $_SERVER['DOCUMENT_ROOT'].'/main_backend/etc/error.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/etc/error.php';
   date_default_timezone_set('Asia/Seoul');
 
   // 1. 변수 정리 : /텍스트 변수, /이미지 파일 정보 변수, /날짜 변수, /이미지 확장자 필터링 변수, /파일 사이즈 제한 변수
@@ -58,7 +58,7 @@
   }
 
   // 접속 정보 로드
-  include_once $_SERVER['DOCUMENT_ROOT'].'/main_backend/connect/dbconn.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/connect/dbconn.php';
 
   // sql 명령어 입력
   $sql = "INSERT INTO spl_products (pro_name, pro_pri, pro_desc, pro_img, pro_reg) VALUES (?,?,?,?,?)";

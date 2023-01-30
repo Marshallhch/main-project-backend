@@ -1,9 +1,9 @@
 <?php
 
-  // include $_SERVER['DOCUMENT_ROOT'].'/main_backend/etc/error.php';
+  // include $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/etc/error.php';
 
   header("Access-Control-Allow-Origin: *");
-  include_once $_SERVER['DOCUMENT_ROOT'].'/main_backend/connect/dbconn.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/connect/dbconn.php';
 
   if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['req_sign'] == 'signup'){
     signup($conn);

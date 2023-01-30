@@ -4,6 +4,8 @@
 
   $req_cart = $_GET['req_cart'];
 
+  // echo json_encode(array("cart_sum" => $_POST['cart_sum']));
+
   session_start();
   // 1. 카트 저장
   // - 처음 하나의 상품을 입력할 경우 세션 생성
@@ -28,7 +30,7 @@
           'cart_count' => $_POST['cart_count'],
           'cart_sum' => $_POST['cart_sum']
         );
-        echo json_encode(array("msg" => "카트에 상품이 추가되었습니다."));
+        echo json_encode(array("msg" => "카트에 상품이 추가되었습니다.", "cart_sum" => $_POST['cart_sum']));
       }
     } else {
       // 세션이 존재하지 않을때 첫 세션 생성

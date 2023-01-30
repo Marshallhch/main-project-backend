@@ -1,7 +1,7 @@
 <?php
 
-  include $_SERVER['DOCUMENT_ROOT'].'/main_backend/etc/error.php';
-  include_once $_SERVER['DOCUMENT_ROOT'].'/main_backend/connect/dbconn.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/etc/error.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/soaply_backend/connect/dbconn.php';
 
 
   function parse_raw_http_request(array &$a_data){
@@ -119,12 +119,17 @@
     $sql_avg = "SELECT AVG(cmt_star) as avg FROM spl_cmt WHERE cmt_pro_idx = $p_idx";
     $avg_result = mysqli_query($conn, $sql_avg);
     $avg_arr = mysqli_fetch_array($avg_result)['avg'];
+    
+    // if(!$avg_result){
+    //   $avg_arr = 0;
+    // } else {
+    //   $avg_arr = mysqli_fetch_array($avg_result)['avg'];
+    // }
 
     if(!mysqli_num_rows($result)){
-      echo json_encode(array("msg" => "조회된 게시글이 없습니다."));
+      echo json_encode(array("msg" => "조회된 게시글이 없습니다.", "avg" => 0));
       exit();
     } else {
-
       $json_result = array(); // 빈 배열 초기화
       while($row = mysqli_fetch_array($result)){
         array_push($json_result, array("cmt_idx" => $row['cmt_idx'], "cmt_cont" => $row['cmt_cont'], "cmt_reg" => $row['cmt_reg'], "user_id" => $row['user_id'], "session_id" => $userid, "rating" => $row['cmt_star'], "avg" => $avg_arr)); // 첫번째 파라미터 : 대상 배열, 두번째 파라미터는 배열 입력값
